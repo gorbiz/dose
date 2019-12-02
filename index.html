@@ -3,6 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="style.css">
   <title>Dose</title>
 </head>
 <body>
@@ -17,78 +18,9 @@
     >
   </form>
 
-  <ul id="logs">
-  </ul>
+  <ul id="logs"></ul>
 
-  <script>
-    const log = JSON.parse(window.localStorage.getItem('log') || '[]') || []
-
-    function renderLog (log) {
-      const res = log.map(l => `<li>${l.text}</li>`).join('\n')
-      document.getElementById('logs').innerHTML = res
-    }
-    renderLog(log)
-
-    function saveLog({ time, text }) {
-      time = time || new Date()
-      log.push({time, text})
-      window.localStorage.setItem('log', JSON.stringify(log))
-    }
-
-    // focus and bring up keyboard (on phone) whatever you do really
-    const bar = document.getElementById('omnibar')
-    document.body.addEventListener('click', function (e) {
-      if (event.target != bar) {
-        bar.focus()
-        bar.click()
-      }
-    }, true)
-
-    // on submit
-    const form = document.getElementById('form')
-    form.addEventListener('submit', function (e) {
-      const text = bar.value
-      saveLog({text})
-    })
-  </script>
-
+  <script src="timeago.js"></script>
+  <script src="script.js"></script>
 </body>
-
-<style>
-  :root {
-    --main-bg-color: rgb(34, 4, 41);
-    --omnibar-bg-color: rgba(255, 255, 255, 0.3);
-    --omnibar-text-color: var(--main-bg-color);
-    --main-text-color: rgba(255, 255, 255, 0.3);
-  }
-  html {
-    height: 100%;
-    color: var(--main-text-color)
-  }
-  body {
-    background: var(--main-bg-color);
-    margin: 0;
-    min-height: 100%;
-  }
-  li {
-    list-style: none;
-  }
-  #omnibar {
-    background: var(--omnibar-bg-color);
-    border: 0;
-    box-sizing: border-box;
-    color: var(--omnibar-text-color);
-    font-size: 2em;
-    opacity: 0.95;
-    padding: 0.5em 0.75em;
-    width: 100%;
-  }
-  #omnibar:focus {
-    outline-width: 0;
-  }
-  #omnibar::placeholder {
-    color: var(--omnibar-text-color);
-    opacity: 0.5;
-  }
-</style>
 </html>

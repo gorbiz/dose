@@ -1,0 +1,38 @@
+:root {
+  --main-bg-color: rgb(34, 4, 41);
+  --omnibar-bg-color: rgba(255, 255, 255, 0.3);
+  --omnibar-text-color: var(--main-bg-color);
+  --main-text-color: rgba(255, 255, 255, 0.3);
+}
+html {
+  height: 100%;
+  color: var(--main-text-color)
+}
+body {
+  background: var(--main-bg-color);
+  margin: 0;
+  min-height: 100%;
+}
+table {
+  font-size: 2em;
+}
+table td time {
+  opacity: 0.5;
+}
+#omnibar {
+  background: var(--omnibar-bg-color);
+  border: 0;
+  box-sizing: border-box;
+  color: var(--omnibar-text-color);
+  font-size: 2em;
+  opacity: 0.95;
+  padding: 0.5em 0.75em;
+  width: 100%;
+}
+#omnibar:focus {
+  outline-width: 0;
+}
+#omnibar::placeholder {
+  color: var(--omnibar-text-color);
+  opacity: 0.5;
+}
