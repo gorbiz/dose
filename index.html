@@ -1,1 +1,49 @@
-<h1>Hello!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="style.css">
+  <title>Dose</title>
+</head>
+<body>
+
+  <input
+    id="omnibar"
+    placeholder="Thunnk..."
+    type="text"
+    spellcheck="false"
+    autofocus
+  >
+
+</body>
+
+<style>
+  :root {
+    --main-bg-color: rgb(34, 4, 41);
+    --omnibar-bg-color: rgba(255, 255, 255, 0.3);
+    --omnibar-text-color: var(--main-bg-color);
+  }
+  body {
+    background: var(--main-bg-color);
+    margin: 0;
+  }
+  #omnibar {
+    background: var(--omnibar-bg-color);
+    border: 0;
+    box-sizing: border-box;
+    color: var(--omnibar-text-color);
+    font-size: 2em;
+    opacity: 0.95;
+    padding: 0.5em 0.75em;
+    width: 100%;
+  }
+  #omnibar:focus {
+    outline-width: 0;
+  }
+  #omnibar::placeholder {
+    color: var(--omnibar-text-color);
+    opacity: 0.5;
+  }
+</style>
+</html>
