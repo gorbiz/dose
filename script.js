@@ -1,16 +1,15 @@
 const logs = JSON.parse(window.localStorage.getItem('logs') || '[]') || []
 
 function renderLog (log) {
-  return `<tr>
-      <td></td>
-      <td><time datetime="${log.time}">${timeago(log.time)}</time></td>
-      <td>${log.text}</td>
-    </tr>`
+  return `<li>
+      <div class="log">${log.text}</div>
+      <time datetime="${log.time}">${timeago(log.time)}</time>
+    </li>`
 }
 
 function renderLogs () {
   const res = logs.slice().reverse().map(renderLog).join('\n')
-  document.getElementById('logs').innerHTML = `<table>${res}</table>`
+  document.getElementById('logs').innerHTML = res
 }
 renderLogs()
 
