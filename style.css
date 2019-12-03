@@ -1,12 +1,13 @@
 :root {
-  --main-bg-color: rgb(34, 4, 41);
-  --omnibar-bg-color: rgba(255, 255, 255, 0.3);
+  --main-bg-color: #0b020e;
+  --omnibar-bg-color: transparent
   --omnibar-text-color: var(--main-bg-color);
   --main-text-color: rgba(255, 255, 255, 0.3);
 }
 html {
   height: 100%;
-  color: var(--main-text-color)
+  color: var(--main-text-color);
+  font-family: Arial;
 }
 body {
   background: var(--main-bg-color);
@@ -14,14 +15,18 @@ body {
   min-height: 100%;
 }
 
+#form {
+  padding: 0.75em;
+}
+
 #omnibar {
   background: var(--omnibar-bg-color);
-  border: 0;
+  border: 1px solid grey;
   box-sizing: border-box;
   color: var(--omnibar-text-color);
   font-size: 2em;
   opacity: 0.95;
-  padding: 0.5em 0.75em;
+  padding: 0.5em 0.5em;
   width: 100%;
 }
 #omnibar:focus {
@@ -32,6 +37,9 @@ body {
   opacity: 0.5;
 }
 
+p.hint {
+  font-style: italic;
+}
 
 ul {
   font-size: 2em;
