@@ -37,24 +37,22 @@ body {
   opacity: 0.5;
 }
 
-p.hint {
-  font-style: italic;
+p#top-info {
+  padding: 0 1em;
+  margin: 0;
 }
 
 ul {
   font-size: 2em;
   margin: 0;
-  padding: .25em;
+  padding: 0 .4em;
 }
 li {
   list-style: none;
-  /* min-width: 100px; */
-  /* max-width: 600px; */
   padding: 0 .25em;
   /* background: rgba(255,255,255,.1); */
   margin: .5em 0;
-  border: 2px solid rgba(255,255,255,.1);
-  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,.1);
 }
 li .log {
   padding: 0.5em 0 0 0;

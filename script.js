@@ -1,5 +1,11 @@
 const logs = JSON.parse(window.localStorage.getItem('logs') || '[]') || []
 
+const topInfo = document.getElementById('top-info')
+const firstHintMessage = 'Hint: Start typing for example “coffee” or “meditation”.'
+if (!logs.length) {
+  topInfo.innerText = firstHintMessage
+}
+
 function renderLog (log) {
   return `<li>
       <div class="log">${log.text}</div>
@@ -34,6 +40,15 @@ document.body.addEventListener('click', function (event) {
     bar.click()
   }
 }, true)
+
+// on type
+bar.addEventListener('input', function (e) {
+  if (bar.value) {
+    topInfo.innerText = 'Matches:'
+  } else {
+    topInfo.innerText = logs.length ? '...' : firstHintMessage
+  }
+})
 
 // on submit
 const form = document.getElementById('form')
