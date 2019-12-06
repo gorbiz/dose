@@ -13,7 +13,7 @@ function timeago (ts) {
 
   if (days) {
     // ex 1 day & 5 hours ago
-    return `${days} days ${hours} hours`
+    return `${days} days ${hours} hours ago`
   } else {
     // ex 1 hour and 36 minutes ago
     if (!hours && !minutes) return `${seconds} seconds ago`
