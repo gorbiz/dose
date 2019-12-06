@@ -20,13 +20,6 @@ function timeago (ts) {
     if (!hours) return `${minutes} minutes ago`
     return `${hours} hours ${minutes} minutes ago`
   }
-
-  const res = []
-  if (days) res.push(`${days}d`)
-  if (hours) res.push(`${hours}h`)
-  if (minutes) res.push(`${minutes}m`)
-  if (seconds) res.push(`${seconds}s`)
-  return res.join('') + ' ago'
 }
 
 const logs = JSON.parse(window.localStorage.getItem('logs') || '[]') || []
