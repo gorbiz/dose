@@ -47,18 +47,23 @@ ul {
   margin: 0;
   padding: 0 .4em;
 }
-li {
+li.log {
   list-style: none;
   padding: 0 .25em;
   /* background: rgba(255,255,255,.1); */
   margin: .5em 0;
   border: 1px solid rgba(255,255,255,.1);
 }
-li .log {
+li.log .text {
   padding: 0.5em 0 0 0;
   line-height: 0;
 }
-li time {
+li.log time {
   opacity: 0.5;
   font-size: 0.5em;
+}
+
+li.moving {
+  border-color: red;
+  position: relative;
 }
