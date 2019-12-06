@@ -1,3 +1,34 @@
+function timeago (ts) {
+  const ms = +new Date() - +new Date(ts)
+  var seconds = Math.floor(ms / 1000)
+
+  if (!seconds) return 'just now'
+
+  const days = Math.floor(seconds / (3600 * 24))
+  seconds -= days * 3600 * 24
+  const hours = Math.floor(seconds / 3600)
+  seconds -= hours * 3600
+  const minutes = Math.floor(seconds / 60)
+  seconds -= minutes * 60
+
+  if (days) {
+    // ex 1 day & 5 hours ago
+    return `${days} days ${hours} hours`
+  } else {
+    // ex 1 hour and 36 minutes ago
+    if (!hours && !minutes) return `${seconds} seconds ago`
+    if (!hours) return `${minutes} minutes ago`
+    return `${hours} hours ${minutes} minutes ago`
+  }
+
+  const res = []
+  if (days) res.push(`${days}d`)
+  if (hours) res.push(`${hours}h`)
+  if (minutes) res.push(`${minutes}m`)
+  if (seconds) res.push(`${seconds}s`)
+  return res.join('') + ' ago'
+}
+
 const logs = JSON.parse(window.localStorage.getItem('logs') || '[]') || []
 
 const topInfo = document.getElementById('top-info')
@@ -30,6 +61,7 @@ function saveLog ({ time, text }) {
   time = time || new Date()
   logs.push({ time, text })
   window.localStorage.setItem('logs', JSON.stringify(logs))
+  renderLogs()
 }
 
 // focus and bring up keyboard (on phone) whatever you do really
@@ -54,5 +86,6 @@ bar.addEventListener('input', function (e) {
 const form = document.getElementById('form')
 form.addEventListener('submit', function (e) {
   const text = bar.value
+  bar.value = ''
   saveLog({ text })
 })
