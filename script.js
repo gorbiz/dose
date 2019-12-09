@@ -1,3 +1,4 @@
+// making pretty timestamps
 function timeago (ts) {
   const ms = +new Date() - +new Date(ts)
   var seconds = Math.floor(ms / 1000)
@@ -22,33 +23,36 @@ function timeago (ts) {
   }
 }
 
+// keeper of all the entries
 const logs = JSON.parse(window.localStorage.getItem('logs') || '[]') || []
 
+// hints & texts like "Matches" just below the omnibox
 const topInfo = document.getElementById('top-info')
 const firstHintMessage = 'Hint: Start typing for example “coffee” or “meditation”.'
-if (!logs.length) {
-  topInfo.innerText = firstHintMessage
-}
+if (!logs.length) topInfo.innerText = firstHintMessage
 
+
+const tpl = document.getElementById('tpl-entry')
 function renderLog (log) {
-  return `<li class="log">
-      <div class="text">${log.text}</div>
-      <time datetime="${log.time}">${timeago(log.time)}</time>
-    </li>`
+  const tplEntry = tpl.content.cloneNode(true)
+  tplEntry.querySelector('.text').innerText = log.text
+  tplEntry.querySelector('time').dateTime = log.time
+  tplEntry.querySelector('time').innerText = timeago(log.time)
+  return tplEntry
 }
 
 function renderLogs () {
-  const res = logs.slice().reverse().map(renderLog).join('\n')
-  document.getElementById('logs').innerHTML = res
+  const logsEl = document.getElementById('logs')
+  logs.slice().reverse().map(log => {
+    console.log(log)
+    const res = renderLog(log)
+    console.log(res)
+    logsEl.appendChild(res)
+  })
 }
 renderLogs()
 
-setInterval(function () {
-  document.querySelectorAll('time').forEach(time => {
-    const newTimeago = timeago(time.getAttribute('datetime'))
-    if (time.innerText !== newTimeago) time.innerText = newTimeago
-  })
-}, 1000)
+
 
 function saveLog ({ time, text }) {
   time = time || new Date()
@@ -57,14 +61,33 @@ function saveLog ({ time, text }) {
   renderLogs()
 }
 
-// focus and bring up keyboard (on phone) whatever you do really
+// click entry to expand it (for editing and more)
+const clickLog = (logElement) => {
+  const text = logElement.querySelector('.text').innerText
+  const time = logElement.querySelector('time').dateTime
+  logElement.classList.toggle('expanded')
+}
+
+
+
+// tap on things:
+//  - expand entries
+//  - focus and bring up keyboard (on phone) else is tapped
 const bar = document.getElementById('omnibar')
 document.body.addEventListener('click', function (event) {
-  if (event.target !== bar) {
+  const target = event.target
+  const logItem = target.closest('li.log')
+  if (logItem) { // is or har parent element that is an entry
+    clickLog(logItem)
+    return
+  }
+  if (target !== bar) {
     bar.focus()
     bar.click()
   }
 }, true)
+
+
 
 // on type
 bar.addEventListener('input', function (e) {
@@ -75,6 +98,8 @@ bar.addEventListener('input', function (e) {
   }
 })
 
+
+
 // on submit
 const form = document.getElementById('form')
 form.addEventListener('submit', function (e) {
@@ -82,3 +107,12 @@ form.addEventListener('submit', function (e) {
   bar.value = ''
   saveLog({ text })
 })
+
+
+// update timestamps now and then
+setInterval(function () {
+  document.querySelectorAll('time').forEach(time => {
+    const newTimeago = timeago(time.getAttribute('datetime'))
+    if (time.innerText !== newTimeago) time.innerText = newTimeago
+  })
+}, 1000)

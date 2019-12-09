@@ -8,6 +8,14 @@
 </head>
 <body>
 
+  <!-- perhaps almost definitely do this using `slots` & web components‽ too -->
+  <template id="tpl-entry">
+    <li class="log">
+      <div class="text">{log.text}</div>
+      <time datetime="{log.time}">{timeago(log.time)}</time>
+    </li>
+  </template>
+
   <form id="form">
     <input
       id="omnibar"

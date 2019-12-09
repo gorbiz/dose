@@ -56,14 +56,20 @@ li.log {
 }
 li.log .text {
   padding: 0.5em 0 0 0;
-  line-height: 0;
+  line-height: 1.0;
+  overflow:;
 }
 li.log time {
   opacity: 0.5;
   font-size: 0.5em;
 }
 
-li.moving {
+li.expanded {
+  border-color: green;
+}
+
+/* For slide remove (etc?) */
+/* li.moving {
   border-color: red;
   position: relative;
-}
+} */
