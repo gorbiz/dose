@@ -8,8 +8,10 @@
 
   <!-- do this using `templates`, `slots` & web components‽ -->
   <script type="text/dose-tpl" id="tpl-entry">
-    <li class="log">
-      <input class="text" type="text" spellcheck="false" value="{text}" />
+    <li class="log" data-text="{text}" data-time="{time}">
+      <form onsubmit="editEntry(event); return false;">
+        <input class="text" type="text" spellcheck="false" value="{text}" />
+      </form>
       <time datetime="{time}">{time}</time>
     </li>
   </script>

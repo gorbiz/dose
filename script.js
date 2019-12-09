@@ -47,7 +47,6 @@ function renderLog (log) {
 function renderLogs () {
   const logsEl = document.getElementById('logs')
   const list = logs.slice().reverse().map(renderLog).join('')
-  console.log(list)
   logsEl.innerHTML = list
 }
 renderLogs()
@@ -57,6 +56,10 @@ renderLogs()
 function saveLog ({ time, text }) {
   time = time || new Date()
   logs.push({ time, text })
+  saveLogs()
+}
+
+function saveLogs () {
   window.localStorage.setItem('logs', JSON.stringify(logs))
   renderLogs()
 }
@@ -76,9 +79,9 @@ const clickLog = (logElement, target) => {
   } else {
     inp = logElement.querySelector('input')
   }
-  if (inp !== document.activeElement) {
+  if (inp !== document.activeElement) { // isn't focused
     inp.focus()
-    inp.selectionStart = inp.selectionEnd = inp.value.length
+    inp.selectionStart = inp.selectionEnd = inp.value.length // move carret to the end (or where it previously was)
   }
 }
 
@@ -122,7 +125,31 @@ form.addEventListener('submit', function (e) {
   saveLog({ text })
 })
 
+// on edit entry
+function editEntry (event) {
+  const target = event.target
+  const li = target.parentElement
+  const input = target.querySelector('input')
+  const original = {
+    text: li.getAttribute('data-text'),
+    time: li.getAttribute('data-time') }
+  const edited = {
+    text: input.value,
+    time: li.getAttribute('data-time') }
+  updateEntry(original, edited)
+  input.blur()
+  li.classList.remove('expanded')
+}
 
+function updateEntry(original, edited) {
+  for (const log of logs) {
+    if (JSON.stringify(original) == JSON.stringify(log)) {
+      log = edited
+      saveLogs()
+      return
+    }
+  }
+}
 
 function updatePrettyDates () {
   document.querySelectorAll('time').forEach(time => {
