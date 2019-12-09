@@ -12,7 +12,10 @@
       <form onsubmit="editEntry(event); return false;">
         <input class="text" type="text" spellcheck="false" value="{text}" />
       </form>
-      <time datetime="{time}">{time}</time>
+      <div class="log-footer">
+        <time datetime="{time}">{time}</time>
+        <a href="#" class="remove" onclick="removeEntry(event); return false">remove</a>
+      </div>
     </li>
   </script>
 

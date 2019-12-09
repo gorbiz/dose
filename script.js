@@ -102,6 +102,11 @@ document.body.addEventListener('click', function (event) {
     bar.focus()
     bar.click()
   }
+
+  document.querySelectorAll('li.log').forEach((miscLog) => {
+    miscLog.classList.remove('expanded')
+  })
+
 }, true)
 
 
@@ -151,6 +156,26 @@ function updateEntry(original, edited) {
   }
 }
 
+
+
+// remove entries
+function removeEntry(event) {
+  const target = event.target
+  const li = target.closest('li')
+  const text = li.getAttribute('data-text')
+  const time = li.getAttribute('data-time')
+  for (let i = 0; i < logs.length; i++) {
+    if (logs[i].text === text && logs[i].time === time) {
+      logs.splice(i, 1)
+      saveLogs()
+      return
+    }
+  }
+}
+
+
+
+// update timestamps now and then
 function updatePrettyDates () {
   document.querySelectorAll('time').forEach(time => {
     const newTimeago = timeago(time.getAttribute('datetime'))
@@ -158,5 +183,5 @@ function updatePrettyDates () {
   })
 }
 updatePrettyDates()
-// update timestamps now and then
+// ...now and then
 setInterval(updatePrettyDates, 1000)

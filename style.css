@@ -67,8 +67,23 @@ li.log {
   border: 1px solid rgba(255,255,255,.1);
 }
 
+li.log .log-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: .2em;
+}
+
+li.log .remove {
+  font-size: .5em;
+  color: #622222;
+  visibility: hidden;
+}
+
 li.log.expanded {
   background: rgba(255, 255, 255, .1);
+}
+li.log.expanded .remove {
+  visibility: visible;
 }
 li.log input.text {
   background:transparent;
