@@ -1,5 +1,12 @@
 // touch / swipe event stuff...
 
+/* For slide remove (etc?) */
+/* li.moving {
+  border-color: red;
+  position: relative;
+} */
+
+
 function findLogFrom (x, y) {
   return document.elementFromPoint(x, y).closest('li.log')
 }

@@ -29,24 +29,26 @@ const logs = JSON.parse(window.localStorage.getItem('logs') || '[]') || []
 // hints & texts like "Matches" just below the omnibox
 const topInfo = document.getElementById('top-info')
 const firstHintMessage = 'Hint: Start typing for example “coffee” or “meditation”.'
-if (!logs.length) topInfo.innerText = firstHintMessage
+if (logs.length) {
+  document.getElementById('history').classList.remove('empty')
+} else {
+  topInfo.innerText = firstHintMessage
+}
 
 
-const tpl = document.getElementById('tpl-entry')
 function renderLog (log) {
-  const tplEntry = tpl.content.cloneNode(true)
-  tplEntry.querySelector('.text').innerText = log.text
-  tplEntry.querySelector('time').dateTime = log.time
-  tplEntry.querySelector('time').innerText = timeago(log.time)
-  return tplEntry
+  let tpl = document.getElementById('tpl-entry').innerText
+  Object.entries(log).map(([name, value]) => {
+    tpl = tpl.split(`{${name}}`).join(value)
+  })
+  return tpl  
 }
 
 function renderLogs () {
   const logsEl = document.getElementById('logs')
-  logs.slice().reverse().map(log => {
-    const res = renderLog(log)
-    logsEl.appendChild(res)
-  })
+  const list = logs.slice().reverse().map(renderLog).join('')
+  console.log(list)
+  logsEl.innerHTML = list
 }
 renderLogs()
 
@@ -92,7 +94,7 @@ bar.addEventListener('input', function (e) {
   if (bar.value) {
     topInfo.innerText = 'Matches:'
   } else {
-    topInfo.innerText = logs.length ? '...' : firstHintMessage
+    topInfo.innerText = logs.length ? '' : firstHintMessage
   }
 })
 
@@ -107,10 +109,13 @@ form.addEventListener('submit', function (e) {
 })
 
 
-// update timestamps now and then
-setInterval(function () {
+
+function updatePrettyDates () {
   document.querySelectorAll('time').forEach(time => {
     const newTimeago = timeago(time.getAttribute('datetime'))
     if (time.innerText !== newTimeago) time.innerText = newTimeago
   })
-}, 1000)
+}
+updatePrettyDates()
+// update timestamps now and then
+setInterval(updatePrettyDates, 1000)

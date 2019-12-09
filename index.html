@@ -5,18 +5,18 @@
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="style.css">
   <title>Dose</title>
+
+  <!-- do this using `templates`, `slots` & web components‽ -->
+  <script type="text/dose-tpl" id="tpl-entry">
+    <li class="log">
+
+      <div class="text">{text}</div>
+      <time datetime="{time}">{time}</time>
+    </li>
+  </script>
+
 </head>
 <body>
-
-  <!-- perhaps almost definitely do this using `slots` & web components‽ too -->
-  <!-- XXX Consider reverting to old-school simple str replace templates for now, to get shit done faster -->
-  <template id="tpl-entry">
-    <li class="log">
-      <div class="text">{log.text}</div>
-      <time datetime="{log.time}">{timeago(log.time)}</time>
-    </li>
-  </template>
-
   <form id="form">
     <input
       id="omnibar"
@@ -28,10 +28,12 @@
     >
   </form>
 
-  <p id="top-info">&nbsp;</p>
+  <p id="top-info"></p>
 
-  <p id="top-info">History:</p>
-  <ul id="logs"></ul>
+  <section id="history" class="empty">
+    <p class='title'>History:</p>
+    <ul id="logs"></ul>
+  </section>
 
   <script src="script.js"></script>
   <!-- <script src="swipe.js"></script> -->

@@ -1,3 +1,5 @@
+/* general  */
+
 :root {
   --main-bg-color: #0b020e;
   --omnibar-bg-color: transparent
@@ -15,11 +17,14 @@ body {
   min-height: 100%;
 }
 
+
+
+/* omnibar */
+
 #form {
   padding: 0.75em;
 }
-
-#omnibar {
+#form #omnibar {
   background: var(--omnibar-bg-color);
   border: 1px solid grey;
   box-sizing: border-box;
@@ -32,25 +37,34 @@ body {
 #omnibar:focus {
   outline-width: 0;
 }
-#omnibar::placeholder {
-  color: var(--omnibar-text-color);
-  opacity: 0.5;
-}
 
 p#top-info {
   padding: 0 1em;
   margin: 0;
 }
 
-ul {
+
+
+/* history */
+
+#history.empty {
+  display: none;
+}
+#history .title {
+  padding: 0 1em;
+  margin: 0;  
+}
+
+#history ul {
   font-size: 2em;
   margin: 0;
   padding: 0 .4em;
 }
+
+/* entries (history) */
 li.log {
   list-style: none;
   padding: 0 .25em;
-  /* background: rgba(255,255,255,.1); */
   margin: .5em 0;
   border: 1px solid rgba(255,255,255,.1);
 }
@@ -63,18 +77,3 @@ li.log time {
   opacity: 0.5;
   font-size: 0.5em;
 }
-
-li {
- min-height: 0px; /* just testing */
-}
-li.expanded {
-/*   border-color: green; */
-  min-height: 200px; /* just testing */
-  transition: min-height 100ms; /* just testing */
-}
-
-/* For slide remove (etc?) */
-/* li.moving {
-  border-color: red;
-  position: relative;
-} */
