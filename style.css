@@ -17,8 +17,6 @@ body {
   min-height: 100%;
 }
 
-
-
 /* omnibar */
 
 #form {
@@ -68,7 +66,30 @@ li.log {
   margin: .5em 0;
   border: 1px solid rgba(255,255,255,.1);
 }
-li.log .text {
+
+li.log.expanded {
+  background: rgba(255, 255, 255, .1);
+}
+li.log input.text {
+  background:transparent;
+  border: 0 dotted grey;
+  color: var(--omnibar-text-color);
+  font-size: 1em;
+  pointer-events: none;
+  box-sizing: border-box;
+  width: 100%;
+}
+li.log.expanded input.text {
+/*   border-bottom-width: 1px; */
+  pointer-events: auto;
+}
+li.log input.text:focus {
+  outline-width: 0;
+  width: 1;
+}
+
+
+li.log div.text {
   padding: 0.5em 0 0 0;
   line-height: 1.0;
   overflow:;

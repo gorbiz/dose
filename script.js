@@ -62,10 +62,24 @@ function saveLog ({ time, text }) {
 }
 
 // click entry to expand it (for editing and more)
-const clickLog = (logElement) => {
-  const text = logElement.querySelector('.text').innerText
-  const time = logElement.querySelector('time').dateTime
-  logElement.classList.toggle('expanded')
+const clickLog = (logElement, target) => {
+  if (!logElement.classList.contains('expanded')) {
+    // remove expanded from all other items first
+    document.querySelectorAll('li.log').forEach((miscLog) => {
+      if (miscLog != logElement) miscLog.classList.remove('expanded')
+    })
+    logElement.classList.add('expanded')
+  }
+  let inp = null
+  if (target.matches('input')) {
+    inp = target
+  } else {
+    inp = logElement.querySelector('input')
+  }
+  if (inp !== document.activeElement) {
+    inp.focus()
+    inp.selectionStart = inp.selectionEnd = inp.value.length
+  }
 }
 
 
@@ -78,7 +92,7 @@ document.body.addEventListener('click', function (event) {
   const target = event.target
   const logItem = target.closest('li.log')
   if (logItem) { // is or har parent element that is an entry
-    clickLog(logItem)
+    clickLog(logItem, target)
     return
   }
   if (target !== bar) {
