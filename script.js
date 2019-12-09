@@ -44,9 +44,7 @@ function renderLog (log) {
 function renderLogs () {
   const logsEl = document.getElementById('logs')
   logs.slice().reverse().map(log => {
-    console.log(log)
     const res = renderLog(log)
-    console.log(res)
     logsEl.appendChild(res)
   })
 }

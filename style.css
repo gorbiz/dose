@@ -64,8 +64,13 @@ li.log time {
   font-size: 0.5em;
 }
 
+li {
+ min-height: 0px; /* just testing */
+}
 li.expanded {
-  border-color: green;
+/*   border-color: green; */
+  min-height: 200px; /* just testing */
+  transition: min-height 100ms; /* just testing */
 }
 
 /* For slide remove (etc?) */
