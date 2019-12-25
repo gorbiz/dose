@@ -41,12 +41,14 @@ function renderLog (log) {
   Object.entries(log).map(([name, value]) => {
     tpl = tpl.split(`{${name}}`).join(value)
   })
-  return tpl  
+  return tpl
 }
 
+const urlParams = new URLSearchParams(window.location.search)
+const historySize = Number(urlParams.get('nr') || '100')
 function renderLogs () {
   const logsEl = document.getElementById('logs')
-  const list = logs.slice().reverse().map(renderLog).join('')
+  const list = logs.slice().reverse().slice(0, historySize).map(renderLog).join('')
   logsEl.innerHTML = list
 }
 renderLogs()
