@@ -2,8 +2,9 @@
 
 ```sh
 adb devices # probably shows no devices, so do:
-sudo adb kill-server 
+sudo adb kill-server
 sudo adb start-server
+# if listed in `adb devices` but with no permissions: repeat the above :P
 
 # also
 npm i -g live-server
