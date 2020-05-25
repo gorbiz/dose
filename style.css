@@ -5,6 +5,8 @@ html {
   --omnibar-bg-color: transparent
   --omnibar-text-color: var(--main-bg-color);
   --main-text-color: rgba(0, 0, 0, 1);
+  --border-color: grey;
+  --log-border-color: rgba(0, 0, 0, .2);
 
   height: 100%;
   color : var(--main-text-color);
@@ -15,6 +17,8 @@ html.dark {
   --omnibar-bg-color: transparent
   --omnibar-text-color: var(--main-bg-color);
   --main-text-color: rgba(255, 255, 255, 0.5);
+  --border-color:grey;
+  --log-border-color: rgba(255, 255, 255, .2);
 }
 body {
   background: var(--main-bg-color);
@@ -29,7 +33,7 @@ body {
 }
 #form #omnibar {
   background: var(--omnibar-bg-color);
-  border: 1px solid grey;
+  border: 1px solid var(--border-color);
   box-sizing: border-box;
   color: var(--omnibar-text-color);
   font-size: 2em;
@@ -58,6 +62,9 @@ p#top-info {
   padding: 0 1em;
   margin: 0;
 }
+#history .title-box p {
+  margin: 0;
+}
 #history .title-box .toggle {
   margin-left: auto;
 }
@@ -79,7 +86,7 @@ li.log {
   list-style: none;
   padding: 0 .25em;
   margin: .5em 0;
-  border: 1px solid rgba(255,255,255,.1);
+  border: 1px solid var(--log-border-color);
 }
 
 li.log .log-footer {
@@ -102,7 +109,7 @@ li.log.expanded .remove {
 }
 li.log input.text {
   background:transparent;
-  border: 0 dotted grey;
+  border: 0 dotted var(--border-color);
   color: var(--omnibar-text-color);
   font-size: 1em;
   pointer-events: none;
