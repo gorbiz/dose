@@ -1,15 +1,20 @@
 /* general  */
 
-:root {
+html {
+  --main-bg-color: #fff;
+  --omnibar-bg-color: transparent
+  --omnibar-text-color: var(--main-bg-color);
+  --main-text-color: rgba(0, 0, 0, 1);
+
+  height: 100%;
+  color : var(--main-text-color);
+  font-family: Arial;
+}
+html.dark {
   --main-bg-color: #0b020e;
   --omnibar-bg-color: transparent
   --omnibar-text-color: var(--main-bg-color);
-  --main-text-color: rgba(255, 255, 255, 0.3);
-}
-html {
-  height: 100%;
-  color: var(--main-text-color);
-  font-family: Arial;
+  --main-text-color: rgba(255, 255, 255, 0.5);
 }
 body {
   background: var(--main-bg-color);
@@ -48,9 +53,19 @@ p#top-info {
 #history.empty {
   display: none;
 }
-#history .title {
+#history .title-box {
+  display: flex;
   padding: 0 1em;
-  margin: 0;  
+  margin: 0;
+}
+#history .title-box .toggle {
+  margin-left: auto;
+}
+#history .title-box .toggle:after {
+  content: '🌑';
+}
+html.dark #history .title-box .toggle:after {
+  content: '☀️';
 }
 
 #history ul {
@@ -107,7 +122,7 @@ li.log input.text:focus {
 li.log div.text {
   padding: 0.5em 0 0 0;
   line-height: 1.0;
-  overflow:;
+  /* overflow:; */
 }
 li.log time {
   opacity: 0.5;

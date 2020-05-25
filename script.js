@@ -105,8 +105,12 @@ const bar = document.getElementById('omnibar')
 document.body.addEventListener('click', function (event) {
   const target = event.target
   const logItem = target.closest('li.log')
-  if (logItem) { // is or har parent element that is an entry
+  if (logItem) { // is or have parent element that is an entry
     clickLog(logItem, target)
+    return
+  }
+  if (target.closest('.toggle')) {
+    document.querySelector('html').classList.toggle('dark')
     return
   }
   if (target !== bar) {
