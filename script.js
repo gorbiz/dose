@@ -140,6 +140,7 @@ bar.addEventListener('input', function (e) {
 // on submit
 const form = document.getElementById('form')
 form.addEventListener('submit', function (e) {
+  e.preventDefault()
   const text = bar.value
   bar.value = ''
   saveLog({ text })
