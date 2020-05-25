@@ -35,10 +35,19 @@ if (logs.length) {
   topInfo.innerText = firstHintMessage
 }
 
+function escapeHtml(unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;")
+}
 
 function renderLog (log) {
   let tpl = document.getElementById('tpl-entry').innerText
   Object.entries(log).map(([name, value]) => {
+    if (name === 'text') value = escapeHtml(value) // make possible to display " (quotes) etc.
     tpl = tpl.split(`{${name}}`).join(value)
   })
   return tpl
