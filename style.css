@@ -61,12 +61,22 @@ p#top-info {
   display: flex;
   padding: 0 1em;
   margin: 0;
+  margin-bottom: -3px;
 }
 #history .title-box p {
   margin: 0;
 }
 #history .title-box .toggle {
   margin-left: auto;
+  /* hack to make clickable area bigger */
+  margin-top    : -12px;
+  padding-top   : 12px;
+  margin-bottom : -13px;
+  padding-bottom: 13px;
+  margin-right  : -16px;
+  padding-right : 16px;
+  padding-left  : 220px;
+  /* background    : rgba(127, 127, 127, 0.2); */
 }
 #history .title-box .toggle:after {
   content: '🌑';
