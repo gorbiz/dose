@@ -152,20 +152,22 @@ function editEntry (event) {
   const li = target.parentElement
   const input = target.querySelector('input')
   const original = {
-    text: li.getAttribute('data-text'),
-    time: li.getAttribute('data-time') }
+    time: li.getAttribute('data-time'),
+    text: li.getAttribute('data-text')
+  }
   const edited = {
-    text: input.value,
-    time: li.getAttribute('data-time') }
+    time: li.getAttribute('data-time'),
+    text: input.value
+  }
   updateEntry(original, edited)
   input.blur()
   li.classList.remove('expanded')
 }
 
 function updateEntry(original, edited) {
-  for (const log of logs) {
-    if (JSON.stringify(original) == JSON.stringify(log)) {
-      log = edited
+  for (let i = logs.length; i > 0; --i) {
+    if (JSON.stringify(original) == JSON.stringify(logs[i])) {
+      logs[i] = edited
       saveLogs()
       return
     }
