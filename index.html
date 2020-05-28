@@ -13,8 +13,11 @@
         <input class="text" type="text" spellcheck="false" value="{text}" />
       </form>
       <div class="log-footer">
-        <time datetime="{time}">{time}</time>
-        <a href="#" class="remove" onclick="removeEntry(event); return false">remove</a>
+        <span class="timebox">
+          <time datetime="{time}" class="ago">{time}</time>
+          <time datetime="{time}" class="exp">{prettydate}</time>
+        </span>
+        <a href="#" class="exp remove" onclick="removeEntry(event); return false">remove</a>
       </div>
     </li>
   </script>

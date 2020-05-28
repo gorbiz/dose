@@ -50,6 +50,9 @@ function renderLog (log) {
     if (name === 'text') value = escapeHtml(value) // make possible to display " (quotes) etc.
     tpl = tpl.split(`{${name}}`).join(value)
   })
+  const offset = new Date().getTimezoneOffset() * 60 * 1000
+  const prettydate = new Date((new Date(log.time) - offset)).toISOString().substr(0, 16).replace('T', ' ')
+  tpl = tpl.split('{prettydate}').join(prettydate)
   return tpl
 }
 
@@ -65,7 +68,7 @@ renderLogs()
 
 
 function saveLog ({ time, text }) {
-  time = time || new Date()
+  time = (time || new Date()).toISOString()
   logs.push({ time, text })
   saveLogs()
 }
@@ -195,7 +198,7 @@ function removeEntry(event) {
 
 // update timestamps now and then
 function updatePrettyDates () {
-  document.querySelectorAll('time').forEach(time => {
+  document.querySelectorAll('time.ago').forEach(time => {
     const newTimeago = timeago(time.getAttribute('datetime'))
     if (time.innerText !== newTimeago) time.innerText = newTimeago
   })

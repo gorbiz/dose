@@ -105,18 +105,22 @@ li.log .log-footer {
   padding-bottom: .2em;
 }
 
+li.log .exp {
+  visibility: hidden;
+}
+li.log.expanded .exp {
+  visibility: visible;
+}
+
 li.log .remove {
   font-size: .5em;
   color: #622222;
-  visibility: hidden;
 }
 
 li.log.expanded {
   background: rgba(255, 255, 255, .1);
 }
-li.log.expanded .remove {
-  visibility: visible;
-}
+
 li.log input.text {
   background:transparent;
   border: 0 dotted var(--border-color);
@@ -140,6 +144,11 @@ li.log div.text {
   padding: 0.5em 0 0 0;
   line-height: 1.0;
   /* overflow:; */
+}
+li.log .timebox {
+  /* hack, unsure whats going on */
+  margin-top: -14px;
+  margin-bottom: -3px;
 }
 li.log time {
   opacity: 0.5;
