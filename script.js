@@ -129,7 +129,7 @@ document.body.addEventListener('click', function (event) {
 // on type
 bar.addEventListener('input', function (e) {
   if (bar.value) {
-    topInfo.innerText = 'Matches:'
+    // topInfo.innerText = 'Matches:'
   } else {
     topInfo.innerText = logs.length ? '' : firstHintMessage
   }
