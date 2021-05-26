@@ -11,8 +11,11 @@ npm i -g live-server
 live-server
 ```
 
-Now hopefully it will show up under *Remote devices* in Chrome Dev Tools.
+Now hopefully it will show up under chrome://inspect/#devices (in Chromium).
 And USB Debugging has been enabled on the phone and the computer authorized to debug it.
+
+## Ad-hoc backup
+Open browser console & type `copy(localStorage.logs)` and overwrite `logs-backup.json`.
 
 # Versioning thought
 Somehow run a script like this (git hook?), display in GUI to know when GitHub as got the lastest version...
