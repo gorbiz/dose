@@ -209,6 +209,7 @@ setInterval(updatePrettyDates, 1000)
 
 window.addEventListener('focus', function () {
   // when switching to application open the on-screen keyboard, blur + focus seems to do it (for Android)
+  console.log('focus (window) event fired...')
   document.getElementById('omnibar').blur()
   document.getElementById('omnibar').focus()
 })
