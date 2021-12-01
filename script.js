@@ -1,3 +1,6 @@
+let globalFilter = ''
+const bar = document.getElementById('omnibar')
+
 // making pretty timestamps
 function timeago (ts) {
   const ms = +new Date() - +new Date(ts)
@@ -58,9 +61,17 @@ function renderLog (log) {
 
 const urlParams = new URLSearchParams(window.location.search)
 const historySize = Number(urlParams.get('nr') || '100')
+const startDate = urlParams.get('startDate')
 function renderLogs () {
   const logsEl = document.getElementById('logs')
-  const list = logs.slice().reverse().slice(0, historySize).map(renderLog).join('')
+  let filtered = logs.slice()
+  if (startDate) filtered = filtered.slice().filter(log => log.time >= startDate)
+  const matched = !globalFilter ? filtered.slice() : filtered.filter(log => log.text.toLowerCase().includes(globalFilter))
+  const matchedCount = matched.length
+  let text = `${matchedCount.toLocaleString('se')} Found`
+  if (matchedCount > historySize) text += ` <span style='opacity: 0.33;'> showing the first ${historySize}</span>`
+  document.querySelector('#history .title').innerHTML = text
+  const list = matched.reverse().slice(0, historySize).map(renderLog).join('')
   logsEl.innerHTML = list
 }
 renderLogs()
@@ -78,18 +89,18 @@ function saveLogs () {
 
 // click entry to expand it (for editing and more)
 const clickLog = (logElement, target) => {
+  const inp = target.matches('input') ? target : logElement.querySelector('input')
+  // console.log({ logElement, target })
+  // bar.value = inp.value
+  // if (bar !== document.activeElement) bar.focus() // <-- breaks interaction on phone :/
+  // return
+  // TODO if double tap:
   if (!logElement.classList.contains('expanded')) {
     // remove expanded from all other items first
     document.querySelectorAll('li.log').forEach((miscLog) => {
       if (miscLog !== logElement) miscLog.classList.remove('expanded')
     })
     logElement.classList.add('expanded')
-  }
-  let inp = null
-  if (target.matches('input')) {
-    inp = target
-  } else {
-    inp = logElement.querySelector('input')
   }
   if (inp !== document.activeElement) { // isn't focused
     inp.focus()
@@ -100,7 +111,6 @@ const clickLog = (logElement, target) => {
 // tap on things:
 //  - expand entries
 //  - focus and bring up keyboard (on phone) else is tapped
-const bar = document.getElementById('omnibar')
 document.body.addEventListener('click', function (event) {
   const target = event.target
   const logItem = target.closest('li.log')
@@ -124,11 +134,9 @@ document.body.addEventListener('click', function (event) {
 
 // on type
 bar.addEventListener('input', function (e) {
-  if (bar.value) {
-    // topInfo.innerText = 'Matches:'
-  } else {
-    topInfo.innerText = logs.length ? '' : firstHintMessage
-  }
+  topInfo.innerText = logs.length ? '' : firstHintMessage
+  globalFilter = bar.value.toLowerCase()
+  renderLogs()
 })
 
 // on submit
@@ -200,3 +208,19 @@ window.addEventListener('focus', function () {
   document.getElementById('omnibar').blur()
   document.getElementById('omnibar').focus()
 })
+
+// const tagCount = {}
+// logs.map(log => log.text).forEach(txt => {
+//   (txt.match(/#[.a-z0-9_-]+/ig) || []).forEach(tag => { tagCount[tag] = (tagCount[tag] || 0) + 1 })
+// })
+// const tags = Object.keys(tagCount).sort()
+// showTags({ tags, filter: '' })
+
+// function showTags({ tags, filter }) {
+//   filter = filter.toLowerCase()
+//   // const t = tags.filter(tag => tag.startsWith('#' + filter))
+//   const t = tags.filter(tag => tag.toLowerCase().includes(filter))
+//   const html = t.map(tag => `<option value="${tag}">${tag} (${tagCount[tag]})</option>`).join('\n')
+//   console.log(html)
+//   document.getElementById('pet-select').innerHTML = html
+// }
