@@ -36,7 +36,7 @@ body {
   border: 1px solid var(--border-color);
   box-sizing: border-box;
   color: var(--omnibar-text-color);
-  font-size: 2em;
+  font-size: 1.5em;
   opacity: 0.95;
   padding: 0.5em 0.5em;
   width: 100%;
@@ -86,7 +86,7 @@ html.dark #history .title-box .toggle:after {
 }
 
 #history ul {
-  font-size: 2em;
+  font-size: 1.5em;
   margin: 0;
   padding: 0 .4em;
 }
