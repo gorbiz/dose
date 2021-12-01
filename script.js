@@ -40,11 +40,11 @@ if (logs.length) {
 
 function escapeHtml (unsafe) {
   return unsafe
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/'/g, '&quot;')
-    .replace(/'/g, '&#039;')
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;")
 }
 
 function renderLog (log) {
@@ -62,16 +62,25 @@ function renderLog (log) {
 const urlParams = new URLSearchParams(window.location.search)
 const historySize = Number(urlParams.get('nr') || '100')
 const startDate = urlParams.get('startDate')
+const sort = urlParams.get('sort')
+console.log({ sort })
 function renderLogs () {
   const logsEl = document.getElementById('logs')
   let filtered = logs.slice()
   if (startDate) filtered = filtered.slice().filter(log => log.time >= startDate)
-  const matched = !globalFilter ? filtered.slice() : filtered.filter(log => log.text.toLowerCase().includes(globalFilter))
+  let matched = !globalFilter ? filtered.slice() : filtered.filter(log => log.text.toLowerCase().includes(globalFilter))
   const matchedCount = matched.length
-  let text = `${matchedCount.toLocaleString('se')} Found`
+
+  const uniq = {}
+  matched.forEach(m => { uniq[m.text] = (uniq[m.text] || 0) + 1 })
+  const uniqCount = Object.keys(uniq).length
+
+  let text = `${matchedCount.toLocaleString('se')} Found, ${uniqCount.toLocaleString('se')} unique`
   if (matchedCount > historySize) text += ` <span style='opacity: 0.33;'> showing the first ${historySize}</span>`
   document.querySelector('#history .title').innerHTML = text
-  const list = matched.reverse().slice(0, historySize).map(renderLog).join('')
+
+  matched = (sort !== null) ? matched.sort((a, b) => a.text > b.text ? 1 : -1 ) : matched.reverse()
+  const list = matched.slice(0, historySize).map(renderLog).join('')
   logsEl.innerHTML = list
 }
 renderLogs()
