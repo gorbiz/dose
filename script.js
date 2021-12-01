@@ -100,7 +100,7 @@ function saveLogs () {
 const clickLog = (logElement, target) => {
   const inp = target.matches('input') ? target : logElement.querySelector('input')
   // console.log({ logElement, target })
-  // bar.value = inp.value
+  bar.value = inp.value
   // if (bar !== document.activeElement) bar.focus() // <-- breaks interaction on phone :/
   // return
   // TODO if double tap:
