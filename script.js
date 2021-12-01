@@ -60,9 +60,9 @@ function renderLog (log) {
 }
 
 const urlParams = new URLSearchParams(window.location.search)
-const historySize = Number(urlParams.get('nr') || '100')
-const startDate = urlParams.get('startDate')
-const sort = urlParams.get('sort')
+const historySize = Number(urlParams.get('nr') || '100') // NOTE example: /?nr=500               <-- to show up to 500 entries
+const startDate = urlParams.get('startDate')             // NOTE example: /?startDate=2021-11-20 <-- to exclude all entried before
+const sort = urlParams.get('sort')                       // NOTE example: /?sort                 <-- to sort results alphab. (instead of cron.)
 console.log({ sort })
 function renderLogs () {
   const logsEl = document.getElementById('logs')
