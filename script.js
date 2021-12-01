@@ -35,13 +35,13 @@ if (logs.length) {
   topInfo.innerText = firstHintMessage
 }
 
-function escapeHtml(unsafe) {
+function escapeHtml (unsafe) {
   return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;")
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/'/g, '&quot;')
+    .replace(/'/g, '&#039;')
 }
 
 function renderLog (log) {
@@ -65,8 +65,6 @@ function renderLogs () {
 }
 renderLogs()
 
-
-
 function saveLog ({ time, text }) {
   time = (time || new Date()).toISOString()
   logs.push({ time, text })
@@ -83,7 +81,7 @@ const clickLog = (logElement, target) => {
   if (!logElement.classList.contains('expanded')) {
     // remove expanded from all other items first
     document.querySelectorAll('li.log').forEach((miscLog) => {
-      if (miscLog != logElement) miscLog.classList.remove('expanded')
+      if (miscLog !== logElement) miscLog.classList.remove('expanded')
     })
     logElement.classList.add('expanded')
   }
@@ -98,8 +96,6 @@ const clickLog = (logElement, target) => {
     inp.selectionStart = inp.selectionEnd = inp.value.length // move carret to the end (or where it previously was)
   }
 }
-
-
 
 // tap on things:
 //  - expand entries
@@ -124,10 +120,7 @@ document.body.addEventListener('click', function (event) {
   document.querySelectorAll('li.log').forEach((miscLog) => {
     miscLog.classList.remove('expanded')
   })
-
 }, true)
-
-
 
 // on type
 bar.addEventListener('input', function (e) {
@@ -137,8 +130,6 @@ bar.addEventListener('input', function (e) {
     topInfo.innerText = logs.length ? '' : firstHintMessage
   }
 })
-
-
 
 // on submit
 const form = document.getElementById('form')
@@ -167,7 +158,7 @@ function editEntry (event) {
   li.classList.remove('expanded')
 }
 
-function updateEntry(original, edited) {
+function updateEntry (original, edited) {
   for (let i = logs.length; i > 0; --i) {
     if (JSON.stringify(original) == JSON.stringify(logs[i])) {
       logs[i] = edited
@@ -177,10 +168,8 @@ function updateEntry(original, edited) {
   }
 }
 
-
-
 // remove entries
-function removeEntry(event) {
+function removeEntry (event) {
   const target = event.target
   const li = target.closest('li')
   const text = li.getAttribute('data-text')
@@ -193,8 +182,6 @@ function removeEntry(event) {
     }
   }
 }
-
-
 
 // update timestamps now and then
 function updatePrettyDates () {
