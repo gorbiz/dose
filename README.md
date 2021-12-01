@@ -5,14 +5,17 @@ adb devices # probably shows no devices, so do:
 sudo adb kill-server
 sudo adb start-server
 # if listed in `adb devices` but with no permissions: repeat the above :P
-
-# also
-npm i -g live-server
-live-server
 ```
 
 Now hopefully it will show up under chrome://inspect/#devices (in Chromium).
 And USB Debugging has been enabled on the phone and the computer authorized to debug it.
+
+# Dev server
+
+```sh
+npm i -g live-server
+live-server
+```
 
 ## Ad-hoc backup
 Open browser console & type `copy(localStorage.logs)` and overwrite `logs-backup.json`.
