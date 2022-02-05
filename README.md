@@ -17,7 +17,7 @@ Not sure which sizes are needed, maybe 192, 512 are enough: https://github.com/G
 Also, `dose.webmanifest` needs to be manually updated.
 
 # Deploy to test server
-
+⚠️ Remove everything there at the server once before doing this ...probably.
 ```sh
 rsync -avzh --exclude .git --exclude node_modules * cloud:dev.lifefeed.me
 ```
