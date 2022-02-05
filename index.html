@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
+  <meta charset="utf-8">
+  <title>dose</title>
+  <meta name="description" content="Track behaviors, supplementat, diet, etc.">
+  <meta name="author" content="gorbiz">
+  <meta name="theme-color" content="#0B020E">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" type="image/svg+xml" href="pill.svg">
+  <meta property="og:image" content="icons/icon-512.png">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
   <link rel="stylesheet" href="style.css">
-  <title>dose</title>
 
   <!-- do this using `templates`, `slots` & web components‽ -->
   <script type="text/dose-tpl" id="tpl-entry">
@@ -46,7 +51,7 @@
     <ul id="logs"></ul>
   </section>
 
+  <!-- TODO add defer & move to head -->
   <script src="script.js"></script>
-  <!-- <script src="swipe.js"></script> -->
 </body>
 </html>

@@ -1,3 +1,27 @@
+# Setup dev server
+Requirements:
+ - `mkcert` ex. `sudo pacman -Syu mkcert`
+ - `127.0.0.1  dose.dev` in `/etc/hosts
+
+```sh
+npm install
+npm start
+# And open https://dose.dev:8080 (or whichever is rePORTed)
+```
+
+# Generate icons
+```sh
+npm run make-icons
+```
+Not sure which sizes are needed, maybe 192, 512 are enough: https://github.com/GoogleChrome/lighthouse/issues/291
+Also, `dose.webmanifest` needs to be manually updated.
+
+# Deploy to test server
+
+```sh
+rsync -avzh --exclude .git --exclude node_modules * cloud:dev.lifefeed.me
+```
+
 # Remote code @ phone
 
 ```sh
@@ -10,30 +34,5 @@ sudo adb start-server
 Now hopefully it will show up under chrome://inspect/#devices (in Chromium).
 And USB Debugging has been enabled on the phone and the computer authorized to debug it.
 
-# Dev server
-
-```sh
-npm i -g live-server
-live-server
-```
-
 ## Ad-hoc backup
-Open browser console & type `copy(localStorage.logs)` and overwrite `logs-backup.json`.
-
-# Versioning thought
-Somehow run a script like this (git hook?), display in GUI to know when GitHub as got the lastest version...
-`echo "windows.version = `git rev-list --all --count`" > version.js`
-
-# Snippets
-
-## Nice resize transitions
-
-```css
-li {
- min-height: 0px;
-}
-li.expanded {
-  min-height: 200px;
-  transition: min-height 100ms;
-}
-```
+Open browser console & type `copy(localStorage.logs)` and overwrite `../dose-data/logs-<device>.json`.

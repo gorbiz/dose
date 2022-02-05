@@ -1,0 +1,17 @@
+{
+  "name": "dose",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "install": "mkcert -install && mkdir -p .ssl && mkcert -key-file .ssl/key.pem -cert-file .ssl/cert.pem dose.dev",
+    "postinstall": "npm run make-icons",
+    "start": "http-server --ssl --cert .ssl/cert.pem --key .ssl/key.pem",
+    "make-icons": "cd icons && for res in 32 64 96 128 168 192 256 512; do svgexport icon.svg icon-$res.png $res:; done"
+  },
+  "author": "gorbiz@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.0",
+    "svgexport": "^0.4.2"
+  }
+}
