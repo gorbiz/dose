@@ -236,3 +236,11 @@ window.addEventListener('focus', function () {
 //   console.log(html)
 //   document.getElementById('pet-select').innerHTML = html
 // }
+
+window.addEventListener('DOMContentLoaded', (event) => {
+  document.querySelectorAll('button.shortcut').forEach(button => {
+    button.addEventListener('click', event => {
+      bar.value = event.currentTarget.innerHTML
+    })
+  })
+})

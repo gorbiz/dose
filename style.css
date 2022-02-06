@@ -154,3 +154,15 @@ li.log time {
   opacity: 0.5;
   font-size: 0.5em;
 }
+
+section#buttons {
+  padding: 0 1em;
+}
+
+button.shortcut {
+  background: transparent;
+  padding: 0.4em 0.2em;
+  color: var(--main-text-color);
+  box-shadow: none;
+  border: 1px solid var(--border-color);
+}
