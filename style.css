@@ -156,12 +156,13 @@ li.log time {
 }
 
 section#buttons {
-  padding: 0 1em;
+  padding: 10px;
+  padding-bottom: 0;
 }
 
 button.shortcut {
   background: transparent;
-  padding: 0.4em 0.2em;
+  padding: 4px;
   color: var(--main-text-color);
   box-shadow: none;
   border: 1px solid var(--border-color);
