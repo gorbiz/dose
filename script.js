@@ -239,8 +239,16 @@ window.addEventListener('focus', function () {
 // }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  document.querySelectorAll('button.shortcut').forEach(element => {
-    element.addEventListener('click', event => {
+  const buttonsSection = document.querySelector('section#buttons')
+  const buttons = JSON.parse(window.localStorage.getItem('buttons') || '[]')
+
+  buttons.map(({ text, quick }) => {
+    const el = document.createElement('button')
+    el.classList.add('shortcut')
+    if (quick) el.classList.add('quick')
+    el.innerHTML = text
+
+    el.addEventListener('click', event => {
       const button = event.currentTarget
       const text = button.innerHTML // NOTE button.innerText makes more sense to me, but seems to trim trailing space
       if (button.classList.contains('quick')) {
@@ -249,5 +257,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         bar.value = text
       }
     })
+
+    buttonsSection.appendChild(el)
   })
 })

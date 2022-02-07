@@ -158,9 +158,13 @@ li.log time {
 section#buttons {
   padding: 10px;
   padding-bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 button.shortcut {
+  flex: 1 1 1;
   background: transparent;
   padding: 4px;
   color: var(--main-text-color);
