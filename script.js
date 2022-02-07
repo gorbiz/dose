@@ -157,6 +157,7 @@ form.addEventListener('submit', function (e) {
   e.preventDefault()
   const text = bar.value
   bar.value = ''
+  globalFilter = ''
   saveLog({ text })
 })
 
