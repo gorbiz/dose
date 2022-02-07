@@ -148,6 +148,18 @@ document.body.addEventListener('click', function (event) {
 bar.addEventListener('input', function (e) {
   topInfo.innerText = logs.length ? '' : firstHintMessage
   globalFilter = bar.value.toLowerCase()
+
+  if (/^button remove/.test(bar.value)) {
+    const indexString = bar.value.replace(/^button remove +/, '')
+    const index = /^[0-9]+/.test(indexString) ? Number(indexString) : -1
+    console.log(index, bar.value.replace(/^button remove/, ''))
+    document.querySelectorAll('section#buttons button').forEach((element, i) => {
+      console.log({ index, i })
+      element.classList.toggle('selected', index === i)
+    })
+    // buttons[index].parentNode.removeChild(buttons[index])
+  }
+
   renderLogs()
 })
 
@@ -158,8 +170,55 @@ form.addEventListener('submit', function (e) {
   const text = bar.value
   bar.value = ''
   globalFilter = ''
-  saveLog({ text })
+  if (text.startsWith('button ')) {
+    execButtonCommand(text)
+    renderLogs()
+  } else {
+    saveLog({ text })
+  }
 })
+
+function execButtonCommand (text) {
+  text = text.replace(/^button /, '')
+  if (text.startsWith('add quick ')) {
+    text = text.replace(/^add quick /, '')
+    return addButton({ text, quick: true })
+  } else if (text.startsWith('add ')) {
+    text = text.replace(/^add /, '')
+    return addButton({ text })
+  } else if (/^remove all/.test(text)) {
+    return removeAllButtons()
+  } else if (/^remove [0-9]+/.test(text)) {
+    text = text.replace(/^remove /, '')
+    const index = Number(text)
+    return removeButton(index)
+  } else {
+    window.alert('Unrecognized button command')
+  }
+}
+
+function addButton ({ text, quick = false }) {
+  const button = { text, quick }
+  const buttons = JSON.parse(window.localStorage.getItem('buttons') || '[]')
+  buttons.push(button)
+  window.localStorage.setItem('buttons', JSON.stringify(buttons))
+  addDOMButton(button)
+}
+
+function removeButton (index) {
+  const buttons = JSON.parse(window.localStorage.getItem('buttons') || '[]')
+  buttons.splice(index, 1)
+  console.log({ buttons })
+  window.localStorage.setItem('buttons', JSON.stringify(buttons))
+  removeDOMButton(index)
+}
+
+function removeAllButtons () {
+  window.localStorage.setItem('buttons', JSON.stringify([]))
+  document.querySelectorAll('section#buttons button').forEach(element => {
+    element.parentNode.removeChild(element)
+  })
+}
 
 // on edit entry
 function editEntry (event) {
@@ -239,25 +298,31 @@ window.addEventListener('focus', function () {
 // }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  const buttonsSection = document.querySelector('section#buttons')
   const buttons = JSON.parse(window.localStorage.getItem('buttons') || '[]')
-
-  buttons.map(({ text, quick }) => {
-    const el = document.createElement('button')
-    el.classList.add('shortcut')
-    if (quick) el.classList.add('quick')
-    el.innerHTML = text
-
-    el.addEventListener('click', event => {
-      const button = event.currentTarget
-      const text = button.innerHTML // NOTE button.innerText makes more sense to me, but seems to trim trailing space
-      if (button.classList.contains('quick')) {
-        saveLog({ text })
-      } else {
-        bar.value = text
-      }
-    })
-
-    buttonsSection.appendChild(el)
-  })
+  buttons.map(addDOMButton)
 })
+
+function addDOMButton ({ text, quick }) {
+  const el = document.createElement('button')
+  el.classList.add('shortcut')
+  if (quick) el.classList.add('quick')
+  el.innerHTML = text
+
+  el.addEventListener('click', event => {
+    const button = event.currentTarget
+    const text = button.innerHTML // NOTE button.innerText makes more sense to me, but seems to trim trailing space
+    if (button.classList.contains('quick')) {
+      saveLog({ text })
+    } else {
+      bar.value = text
+    }
+  })
+
+  const buttonsSection = document.querySelector('section#buttons')
+  buttonsSection.appendChild(el)
+}
+
+function removeDOMButton (index) {
+  const buttons = document.querySelectorAll('section#buttons button')
+  buttons[index].parentNode.removeChild(buttons[index])
+}
