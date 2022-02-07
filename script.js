@@ -152,12 +152,9 @@ bar.addEventListener('input', function (e) {
   if (/^button remove/.test(bar.value)) {
     const indexString = bar.value.replace(/^button remove +/, '')
     const index = /^[0-9]+/.test(indexString) ? Number(indexString) : -1
-    console.log(index, bar.value.replace(/^button remove/, ''))
     document.querySelectorAll('section#buttons button').forEach((element, i) => {
-      console.log({ index, i })
       element.classList.toggle('selected', index === i)
     })
-    // buttons[index].parentNode.removeChild(buttons[index])
   }
 
   renderLogs()
@@ -208,7 +205,6 @@ function addButton ({ text, quick = false }) {
 function removeButton (index) {
   const buttons = JSON.parse(window.localStorage.getItem('buttons') || '[]')
   buttons.splice(index, 1)
-  console.log({ buttons })
   window.localStorage.setItem('buttons', JSON.stringify(buttons))
   removeDOMButton(index)
 }
