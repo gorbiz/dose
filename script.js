@@ -66,7 +66,7 @@ const urlParams = new URLSearchParams(window.location.search)
 const historySize = Number(urlParams.get('nr') || '100') // NOTE example: /?nr=500               <-- to show up to 500 entries
 const startDate = urlParams.get('startDate')             // NOTE example: /?startDate=2021-11-20 <-- to exclude all entried before
 const sort = urlParams.get('sort')                       // NOTE example: /?sort                 <-- to sort results alphab. (instead of cron.)
-console.log({ sort })
+
 function renderLogs () {
   const logsEl = document.getElementById('logs')
   let filtered = logs.slice()
@@ -239,9 +239,15 @@ window.addEventListener('focus', function () {
 // }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  document.querySelectorAll('button.shortcut').forEach(button => {
-    button.addEventListener('click', event => {
-      bar.value = event.currentTarget.innerHTML
+  document.querySelectorAll('button.shortcut').forEach(element => {
+    element.addEventListener('click', event => {
+      const button = event.currentTarget
+      const text = button.innerHTML // NOTE button.innerText makes more sense to me, but seems to trim trailing space
+      if (button.classList.contains('quick')) {
+        saveLog({ text })
+      } else {
+        bar.value = text
+      }
     })
   })
 })
