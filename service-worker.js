@@ -1,5 +1,5 @@
 // Files to cache
-const cacheName = 'dose-v4'
+const cacheName = 'dose-v5'
 const appShellFiles = [
   '',
   'index.html',
@@ -41,4 +41,13 @@ self.addEventListener('fetch', (e) => {
     cache.put(e.request, response.clone())
     return response
   })())
+})
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil(caches.keys().then((keyList) => {
+    return Promise.all(keyList.map((key) => {
+      if (key === cacheName) return
+      return caches.delete(key)
+    }))
+  }))
 })
