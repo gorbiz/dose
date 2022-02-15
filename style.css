@@ -16,7 +16,7 @@ html.dark {
   --main-bg-color: #0b020e;
   --omnibar-bg-color: transparent
   --omnibar-text-color: var(--main-bg-color);
-  --main-text-color: rgba(255, 255, 255, 0.5);
+  --main-text-color: rgba(255, 255, 255, 0.75);
   --border-color:grey;
   --log-border-color: rgba(255, 255, 255, .2);
 }
