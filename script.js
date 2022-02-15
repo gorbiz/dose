@@ -149,8 +149,8 @@ bar.addEventListener('input', function (e) {
   topInfo.innerText = logs.length ? '' : firstHintMessage
   globalFilter = bar.value.toLowerCase()
 
-  if (/^button remove/.test(bar.value)) {
-    const indexString = bar.value.replace(/^button remove +/, '')
+  if (/^button remove/i.test(bar.value)) {
+    const indexString = bar.value.replace(/^button remove +/i, '')
     const index = /^[0-9]+/.test(indexString) ? Number(indexString) : -1
     document.querySelectorAll('section#buttons button').forEach((element, i) => {
       element.classList.toggle('selected', index === i)
@@ -167,7 +167,7 @@ form.addEventListener('submit', function (e) {
   const text = bar.value
   bar.value = ''
   globalFilter = ''
-  if (text.startsWith('button ')) {
+  if (/^button /i.test(text)) {
     execButtonCommand(text)
     renderLogs()
   } else {
@@ -176,17 +176,17 @@ form.addEventListener('submit', function (e) {
 })
 
 function execButtonCommand (text) {
-  text = text.replace(/^button /, '')
-  if (text.startsWith('add quick ')) {
-    text = text.replace(/^add quick /, '')
+  text = text.replace(/^button /i, '')
+  if (/^add quick /i.test(text)) {
+    text = text.replace(/^add quick /i, '')
     return addButton({ text, quick: true })
-  } else if (text.startsWith('add ')) {
-    text = text.replace(/^add /, '')
+  } else if (/^add /i.test(text)) {
+    text = text.replace(/^add /i, '')
     return addButton({ text })
-  } else if (/^remove all/.test(text)) {
+  } else if (/^remove all/i.test(text)) {
     return removeAllButtons()
-  } else if (/^remove [0-9]+/.test(text)) {
-    text = text.replace(/^remove /, '')
+  } else if (/^remove [0-9]+/i.test(text)) {
+    text = text.replace(/^remove /i, '')
     const index = Number(text)
     return removeButton(index)
   } else {
