@@ -322,3 +322,31 @@ function removeDOMButton (index) {
   const buttons = document.querySelectorAll('section#buttons button')
   buttons[index].parentNode.removeChild(buttons[index])
 }
+
+// swipe left / right to switch view...
+function switchView () {
+  document.querySelectorAll('section.page').forEach(el => { el.classList.toggle('hidden') })
+}
+
+const container = document.querySelector('body')
+let initial = { x: null, y: null }
+
+container.addEventListener('touchstart', (e) => {
+  initial = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+})
+
+container.addEventListener('touchmove', (e) => {
+  if (initial.x === null || initial.y === null) return
+
+  const current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
+  const diffX = initial.x - current.x
+  const diffY = initial.y - current.y
+  if (Math.abs(diffX) < Math.abs(diffY)) return // if mostly vertical swipe
+  // CONSIDER if (Math.abs(diffX) < threshold) return // if very short swipe -- probably unindended
+
+  console.log(`swiped ${diffX > 0 ? 'left' : 'right'}`, diffX)
+  switchView()
+
+  initial = { x: null, y: null }
+  // e.preventDefault()
+})
