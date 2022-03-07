@@ -275,6 +275,13 @@ window.addEventListener('focus', function () {
   console.log('focus (window) event fired...')
   document.getElementById('omnibar').blur()
   document.getElementById('omnibar').focus()
+  switchView('page-main')
+})
+
+document.addEventListener('visibilitychange', () => {
+  const { hidden, visibilityState } = document
+  console.log('document.visibilitychange:', { hidden, visibilityState })
+  // XXX do we need this here?: switchView('page-main')
 })
 
 // const tagCount = {}
@@ -323,19 +330,24 @@ function removeDOMButton (index) {
   buttons[index].parentNode.removeChild(buttons[index])
 }
 
-// swipe left / right to switch view...
-function switchView () {
-  document.querySelectorAll('section.page').forEach(el => { el.classList.toggle('hidden') })
+// toggle the view, or change to ex: cssClass = 'page-main'
+function switchView (cssClass = false) {
+  document.querySelectorAll('section.page').forEach(({ classList }) => {
+    if (cssClass) return classList.toggle('hidden', !classList.contains(cssClass))
+    classList.toggle('hidden')
+  })
 }
 
 const container = document.querySelector('body')
 let initial = { x: null, y: null }
 
 container.addEventListener('touchstart', (e) => {
+  if (e.target.tagName === 'INPUT') return
   initial = { x: e.touches[0].clientX, y: e.touches[0].clientY }
 })
 
 container.addEventListener('touchmove', (e) => {
+  if (e.target.tagName === 'INPUT') return
   if (initial.x === null || initial.y === null) return
 
   const current = { x: e.touches[0].clientX, y: e.touches[0].clientY }
