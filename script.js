@@ -149,8 +149,8 @@ bar.addEventListener('input', function (e) {
   topInfo.innerText = logs.length ? '' : firstHintMessage
   globalFilter = bar.value.toLowerCase()
 
-  if (/^button remove/i.test(bar.value)) {
-    const indexString = bar.value.replace(/^button remove +/i, '')
+  if (/^button (remove|del|delete|rm) /i.test(bar.value)) {
+    const indexString = bar.value.replace(/^button (remove|del|delete|rm) /i, '')
     const index = /^[0-9]+/.test(indexString) ? Number(indexString) : -1
     document.querySelectorAll('section#buttons button').forEach((element, i) => {
       element.classList.toggle('selected', index === i)
@@ -183,12 +183,15 @@ function execButtonCommand (text) {
   } else if (/^add /i.test(text)) {
     text = text.replace(/^add /i, '')
     return addButton({ text })
-  } else if (/^remove all/i.test(text)) {
-    return removeAllButtons()
-  } else if (/^remove [0-9]+/i.test(text)) {
-    text = text.replace(/^remove /i, '')
-    const index = Number(text)
-    return removeButton(index)
+  } else if (/^(remove|del|delete|rm) /i.test(text)) {
+    text = text.replace(/^(remove|del|delete|rm) /i, '')
+    if (/^all/i.test(text)) {
+      return removeAllButtons()
+    } else if (/^[0-9]+/i.test(text)) {
+      text = text.replace(/^remove /i, '')
+      const index = Number(text)
+      return removeButton(index)
+    }
   } else {
     window.alert('Unrecognized button command')
   }
