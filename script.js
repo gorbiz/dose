@@ -365,3 +365,5 @@ container.addEventListener('touchmove', (e) => {
   initial = { x: null, y: null }
   // e.preventDefault()
 })
+
+// switchView('page-analytics')

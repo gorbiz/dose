@@ -32,7 +32,7 @@
 
 </head>
 <body>
-  <section class="page page-main">
+  <section id="page-main" class="page page-main">
     <form id="form">
       <input
         id="omnibar"
@@ -61,10 +61,29 @@
     </section>
 
   </section>
-  <section class="page page-analytics hidden">
+  <section id="page-analytics" class="page page-analytics hidden">
     [ Analytics section ]
   </section>
   <!-- TODO add defer & move to head -->
   <script src="script.js"></script>
+  <script type="work-in-progress module">
+    import * as Plot from "https://cdn.skypack.dev/@observablehq/plot@0.4"
+
+    const alphabet = [
+      { letter: 'X', frequency: 0.0015  },
+      { letter: 'Q', frequency: 0.00095 },
+      { letter: 'Z', frequency: 0.00074 },
+    ]
+    const plot = Plot.plot({
+      marks: [
+        Plot.barY(alphabet, {x: "letter", y: "frequency", fill: "steelblue"}),
+        Plot.ruleY([0])
+      ],
+      style: {
+        background: "transparent"
+      }
+    })
+    document.getElementById('page-analytics').append(plot)
+  </script>
 </body>
 </html>
