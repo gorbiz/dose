@@ -9,6 +9,11 @@ npm start
 # And open https://dose.dev:8080 (or whichever is rePORTed)
 ```
 
+## Or (only http & localhost)
+```
+lr-http-server
+```
+
 # Generate icons
 ```sh
 npm run make-icons
