@@ -32,6 +32,9 @@ function timeago (ts) {
 // keeper of all the entries
 const logs = JSON.parse(window.localStorage.getItem('logs') || '[]') || []
 
+const theme = window.localStorage.getItem('theme') || 'auto'
+document.querySelector('html').classList.add(theme)
+
 // hints & texts like "Matches" just below the omnibox
 const topInfo = document.getElementById('top-info')
 const firstHintMessage = 'Hint: Start typing for example “coffee” or “meditation”.'
@@ -131,7 +134,12 @@ document.body.addEventListener('click', function (event) {
     return
   }
   if (target.closest('.toggle')) {
-    document.querySelector('html').classList.toggle('dark')
+    const themes = ['dark', 'light', 'auto']
+    let theme = window.localStorage.getItem('theme') || 'auto'
+    theme = themes[(themes.indexOf(theme) + 1) % 3] // cycle, get next theme mode
+    document.querySelector('html').classList.remove('dark', 'light', 'auto')
+    document.querySelector('html').classList.add(theme)
+    window.localStorage.setItem('theme', theme)
     return
   }
   if (target !== bar) {

@@ -20,6 +20,18 @@ html.dark {
   --border-color:grey;
   --log-border-color: rgba(255, 255, 255, .2);
 }
+/* XXX This is a bit of a hack, a copy of the above... */
+@media (prefers-color-scheme: dark) {
+  html.auto {
+    --main-bg-color: #0b020e;
+    --omnibar-bg-color: transparent
+    --omnibar-text-color: var(--main-bg-color);
+    --main-text-color: rgba(255, 255, 255, 0.75);
+    --border-color:grey;
+    --log-border-color: rgba(255, 255, 255, .2);
+  }
+}
+
 body {
   background: var(--main-bg-color);
   margin: 0;
@@ -82,11 +94,14 @@ p#top-info {
   padding-left  : 60px;
   /* background    : rgba(127, 127, 127, 0.2); */
 }
-#history .title-box .toggle:after {
-  content: '🌑';
+#history .title-box .toggle:after { /* html.auto */
+  content: '🔆';
 }
 html.dark #history .title-box .toggle:after {
   content: '☀️';
+}
+html.light #history .title-box .toggle:after {
+  content: '🌑';
 }
 
 #history ul {
