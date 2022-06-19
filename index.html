@@ -18,7 +18,7 @@
   <script type="text/dose-tpl" id="tpl-entry">
     <li class="log" data-text="{text}" data-time="{time}">
       <form onsubmit="editEntry(event); return false;">
-        <input class="text" type="text" spellcheck="false" value="{text}" />
+        <input class="text {lengthClass}" type="text" spellcheck="false" value="{text}" />
       </form>
       <div class="log-footer">
         <span class="timebox">

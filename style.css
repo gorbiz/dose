@@ -149,6 +149,16 @@ li.log input.text {
   box-sizing: border-box;
   width: 100%;
 }
+/* li.log input.text.below35 { } */
+li.log input.text.below40 { font-size: 0.8em }
+li.log input.text.below50 { font-size: 0.7em }
+li.log input.text.below60 { font-size: 0.6em }
+li.log input.text.below70 { font-size: 0.5em }
+li.log input.text.below80 { font-size: 0.4em }
+li.log input.text.below90 { font-size: 0.3em }
+li.log input.text.below100 { font-size: 0.3em }
+li.log input.text.above100 { font-size: 0.3em }
+
 li.log.expanded input.text {
 /*   border-bottom-width: 1px; */
   pointer-events: auto;

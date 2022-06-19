@@ -52,6 +52,12 @@ function escapeHtml (unsafe) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;")
 }
+function getLenghtClass (text) {
+  const n = text.length
+  if (n < 35) return 'below35'
+  if (n < 100) return 'below' + Math.ceil((n + 1) / 10) * 10
+  return 'above100'
+}
 
 function renderLog (log) {
   let tpl = document.getElementById('tpl-entry').innerText
@@ -59,6 +65,7 @@ function renderLog (log) {
     if (name === 'text') value = escapeHtml(value) // make possible to display " (quotes) etc.
     tpl = tpl.split(`{${name}}`).join(value)
   })
+  tpl = tpl.replaceAll('{lengthClass}', getLenghtClass(log.text))
   const offset = new Date().getTimezoneOffset() * 60 * 1000
   const prettydate = new Date((new Date(log.time) - offset)).toISOString().substr(0, 16).replace('T', ' ')
   tpl = tpl.split('{prettydate}').join(prettydate)
