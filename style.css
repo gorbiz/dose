@@ -150,12 +150,12 @@ li.log input.text {
   width: 100%;
 }
 /* li.log input.text.below35, #omnibar.below35 { } */
-form input[type='text'].below40,  #omnibar.below40  { font-size: 0.9em; }
-form input[type='text'].below50,  #omnibar.below50  { font-size: 0.8em; }
-form input[type='text'].below60,  #omnibar.below60  { font-size: 0.7em; }
-form input[type='text'].below70,  #omnibar.below70  { font-size: 0.6em; }
-form input[type='text'].below80,  #omnibar.below80  { font-size: 0.5em; }
-form input[type='text'].below90,  #omnibar.below90  { font-size: 0.4em; }
+form input[type='text'].below40,  #omnibar.below40  { font-size: 0.8em; }
+form input[type='text'].below50,  #omnibar.below50  { font-size: 0.7em; }
+form input[type='text'].below60,  #omnibar.below60  { font-size: 0.6em; }
+form input[type='text'].below70,  #omnibar.below70  { font-size: 0.5em; }
+form input[type='text'].below80,  #omnibar.below80  { font-size: 0.4em; }
+form input[type='text'].below90,  #omnibar.below90  { font-size: 0.3em; }
 form input[type='text'].below100, #omnibar.below100 { font-size: 0.3em; }
 form input[type='text'].above100, #omnibar.above100 { font-size: 0.3em; }
 
