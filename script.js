@@ -54,6 +54,7 @@ function escapeHtml (unsafe) {
 }
 function getLenghtClass (text) {
   const n = text.length
+  if (n < 30) return 'below30'
   if (n < 35) return 'below35'
   if (n < 100) return 'below' + Math.ceil((n + 1) / 10) * 10
   return 'above100'
@@ -166,7 +167,7 @@ bar.addEventListener('input', function (e) {
 
   const cls = getLenghtClass(bar.value)
   if (!bar.classList.contains(cls)) {
-    bar.classList.remove('below35', 'below40', 'below50', 'below60', 'below70', 'below80', 'below90', 'below100', 'above100')
+    bar.classList.remove('below30', 'below35', 'below40', 'below50', 'below60', 'below70', 'below80', 'below90', 'below100', 'above100')
     bar.classList.add(cls)
   }
 
