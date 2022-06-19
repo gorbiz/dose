@@ -47,7 +47,7 @@ section.page.hidden {
 #form {
   padding: 0.75em;
 }
-#form #omnibar {
+#omnibar {
   background: var(--omnibar-bg-color);
   border: 1px solid var(--border-color);
   box-sizing: border-box;
@@ -149,15 +149,15 @@ li.log input.text {
   box-sizing: border-box;
   width: 100%;
 }
-/* li.log input.text.below35 { } */
-li.log input.text.below40 { font-size: 0.8em }
-li.log input.text.below50 { font-size: 0.7em }
-li.log input.text.below60 { font-size: 0.6em }
-li.log input.text.below70 { font-size: 0.5em }
-li.log input.text.below80 { font-size: 0.4em }
-li.log input.text.below90 { font-size: 0.3em }
-li.log input.text.below100 { font-size: 0.3em }
-li.log input.text.above100 { font-size: 0.3em }
+/* li.log input.text.below35, #omnibar.below35 { } */
+form input[type='text'].below40,  #omnibar.below40  { font-size: 0.9em; }
+form input[type='text'].below50,  #omnibar.below50  { font-size: 0.8em; }
+form input[type='text'].below60,  #omnibar.below60  { font-size: 0.7em; }
+form input[type='text'].below70,  #omnibar.below70  { font-size: 0.6em; }
+form input[type='text'].below80,  #omnibar.below80  { font-size: 0.5em; }
+form input[type='text'].below90,  #omnibar.below90  { font-size: 0.4em; }
+form input[type='text'].below100, #omnibar.below100 { font-size: 0.3em; }
+form input[type='text'].above100, #omnibar.above100 { font-size: 0.3em; }
 
 li.log.expanded input.text {
 /*   border-bottom-width: 1px; */

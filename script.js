@@ -164,6 +164,12 @@ bar.addEventListener('input', function (e) {
   topInfo.innerText = logs.length ? '' : firstHintMessage
   globalFilter = bar.value.toLowerCase()
 
+  const cls = getLenghtClass(bar.value)
+  if (!bar.classList.contains(cls)) {
+    bar.classList.remove('below35', 'below40', 'below50', 'below60', 'below70', 'below80', 'below90', 'below100', 'above100')
+    bar.classList.add(cls)
+  }
+
   if (/^button (remove|del|delete|rm) /i.test(bar.value)) {
     const indexString = bar.value.replace(/^button (remove|del|delete|rm) /i, '')
     const index = /^[0-9]+/.test(indexString) ? Number(indexString) : -1
