@@ -1,5 +1,5 @@
 // Files to cache
-const cacheName = 'dose-v16'
+const cacheName = 'dose-v17'
 const appShellFiles = [
   '',
   'index.html',

@@ -197,6 +197,7 @@ form.addEventListener('submit', function (e) {
   const text = bar.value
   bar.value = ''
   globalFilter = ''
+  if (text === 'reload') return location.reload(true) // forces service worker refresh
   if (/^button /i.test(text)) {
     execButtonCommand(text)
     renderLogs()
