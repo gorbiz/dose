@@ -149,16 +149,16 @@ li.log input.text {
   box-sizing: border-box;
   width: 100%;
 }
-form input[type='text'].below30,  #omnibar.below30  { font-size: 0.95em; }
-form input[type='text'].below35,  #omnibar.below35  { font-size: 0.85em; }
-form input[type='text'].below40,  #omnibar.below40  { font-size: 0.75em; }
-form input[type='text'].below50,  #omnibar.below50  { font-size: 0.65em; }
-form input[type='text'].below60,  #omnibar.below60  { font-size: 0.55em; }
-form input[type='text'].below70,  #omnibar.below70  { font-size: 0.45em; }
-form input[type='text'].below80,  #omnibar.below80  { font-size: 0.35em; }
-form input[type='text'].below90,  #omnibar.below90  { font-size: 0.30em; }
-form input[type='text'].below100, #omnibar.below100 { font-size: 0.30em; }
-form input[type='text'].above100, #omnibar.above100 { font-size: 0.30em; }
+form input[type='text'].below30,  #omnibar.below30  { font-size: 22px; }
+form input[type='text'].below35,  #omnibar.below35  { font-size: 20px; }
+form input[type='text'].below40,  #omnibar.below40  { font-size: 18px; }
+form input[type='text'].below50,  #omnibar.below50  { font-size: 16px; }
+form input[type='text'].below60,  #omnibar.below60  { font-size: 15px; }
+form input[type='text'].below70,  #omnibar.below70  { font-size: 14px; }
+form input[type='text'].below80,  #omnibar.below80  { font-size: 13px; }
+form input[type='text'].below90,  #omnibar.below90  { font-size: 12px; }
+form input[type='text'].below100, #omnibar.below100 { font-size: 11px; }
+form input[type='text'].above100, #omnibar.above100 { font-size: 10px; }
 
 li.log.expanded input.text {
 /*   border-bottom-width: 1px; */
