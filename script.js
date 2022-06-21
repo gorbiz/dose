@@ -3,6 +3,10 @@
 // TODO make this a type='module'(?)
 let globalFilter = ''
 const bar = document.getElementById('omnibar')
+function setOmnibar (value) {
+  bar.value = value
+  bar.dispatchEvent(new Event('change'))
+}
 
 // making pretty timestamps
 function timeago (ts) {
@@ -114,7 +118,7 @@ function saveLogs () {
 const clickLog = (logElement, target) => {
   const inp = target.matches('input') ? target : logElement.querySelector('input')
   // console.log({ logElement, target })
-  bar.value = inp.value
+  setOmnibar(inp.value)
   // if (bar !== document.activeElement) bar.focus() // <-- breaks interaction on phone :/
   // return
   // TODO if double tap:
@@ -195,7 +199,7 @@ const form = document.getElementById('form')
 form.addEventListener('submit', function (e) {
   e.preventDefault()
   const text = bar.value
-  bar.value = ''
+  setOmnibar('')
   globalFilter = ''
   if (text.toLowerCase() === 'reload') return location.reload(true) // forces service worker refresh
   if (/^button /i.test(text)) {
@@ -351,7 +355,7 @@ function addDOMButton ({ text, quick }) {
     if (button.classList.contains('quick')) {
       saveLog({ text })
     } else {
-      bar.value = text
+      setOmnibar(text)
     }
   })
 
