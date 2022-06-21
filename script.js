@@ -201,7 +201,7 @@ form.addEventListener('submit', function (e) {
   const text = bar.value
   setOmnibar('')
   globalFilter = ''
-  if (text.toLowerCase() === 'reload') return location.reload(true) // forces service worker refresh
+  if (text.toLowerCase().trim() === 'reload') return window.location.reload(true) // forces service worker refresh
   if (/^button /i.test(text)) {
     execButtonCommand(text)
     renderLogs()
