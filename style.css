@@ -191,13 +191,12 @@ section#buttons {
   padding-bottom: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 6px;
 }
 
 button.shortcut {
-  flex: 1 1 1;
   background: transparent;
-  padding: 4px;
+  padding: 4px 8px;
   color: var(--main-text-color);
   box-shadow: none;
   border: 1px solid var(--border-color);
