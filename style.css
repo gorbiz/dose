@@ -186,6 +186,9 @@ li.log time {
   font-size: 0.5em;
 }
 
+li.log.changed { background: rgba(127, 0, 255, 0.2); }
+li.log.changed input.text { font-style: italic; }
+
 section#buttons {
   padding: 10px;
   padding-bottom: 0;
